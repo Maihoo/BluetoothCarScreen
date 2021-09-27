@@ -55,7 +55,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView" />
 
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:hint="tippe hier um scrolltext einzugeben"
+        android:inputType="textPersonName"
+        android:textColor="@color/colorWhite"
+        android:textColorHint="@color/colorWhite"
+        android:textSize="10pt"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/linearLayout" />
+
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="78dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -76,8 +90,8 @@
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_width="60dp"
             android:layout_height="50dp"
-            android:drawableLeft="@drawable/undo"
             android:alpha="0.3"
+            android:drawableLeft="@drawable/undo"
             tools:ignore="SpeakableTextPresentCheck" />
 
         <Button
@@ -85,8 +99,8 @@
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_width="60dp"
             android:layout_height="50dp"
-            android:drawableLeft="@drawable/redo"
             android:alpha="0.3"
+            android:drawableLeft="@drawable/redo"
             tools:ignore="SpeakableTextPresentCheck" />
 
         <Button

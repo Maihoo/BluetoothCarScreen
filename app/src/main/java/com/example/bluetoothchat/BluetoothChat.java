@@ -13,13 +13,18 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.MediaStore;
+import android.provider.Settings;
 import android.text.StaticLayout;
 import android.text.method.ScrollingMovementMethod;
 import android.util.AndroidException;
@@ -48,8 +53,16 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
+
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
@@ -67,6 +80,7 @@ public class BluetoothChat extends Activity {
     public static final int MESSAGE_DEVICE_NAME = 4;
     public static final int MESSAGE_TOAST = 5;
     public static final int MESSAGE_TEXT = 6;
+    public static final int MESSAGE_IMAGE = 7;
     // Key names received from the BluetoothChatService Handler
     public static final String DEVICE_NAME = "device_name";
     public static final String TOAST = "toast";
@@ -98,6 +112,8 @@ public class BluetoothChat extends Activity {
     ArrayList<Bitmap> hist = new ArrayList<Bitmap>();
     private int pointer = 0;
     private boolean textScrolling = false;
+    Context context;
+    Activity ac;
 
 
     // Storage Permissions
@@ -119,6 +135,8 @@ public class BluetoothChat extends Activity {
             this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         }
+
+        ac = (Activity) this;
 
         if(D) Log.e(TAG, "+++ ON CREATE +++");
         // Set up the window layout
@@ -161,7 +179,7 @@ public class BluetoothChat extends Activity {
             }
         });
 
-        Context context = this;
+        context = this;
         tv = findViewById(R.id.colorTextView);
 
         mColorButton.setOnClickListener(new OnClickListener() {
@@ -175,6 +193,43 @@ public class BluetoothChat extends Activity {
             public void onClick(View v) {
                 byte[] st = editText.getText().toString().getBytes(StandardCharsets.UTF_8);
                 mChatService.write(st);
+
+
+                if (editText.getText().toString().equalsIgnoreCase("")) {
+                    textScrolling = false;
+                    return;
+                }
+
+                textScrolling = true;
+                scrollText.setText(editText.getText().toString());
+                scrollText.setAlpha((float) 1.0);
+
+                new Thread() {
+                    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
+                    @Override
+                    public void run() {
+                        float textWidth = StaticLayout.getDesiredWidth(scrollText.getText().toString(), scrollText.getPaint());
+                        Log.e("f","width:" + textWidth);
+                        DisplayMetrics dm = new DisplayMetrics();
+                        getWindowManager().getDefaultDisplay().getRealMetrics(dm);
+                        scrollText.setX( dm.widthPixels );
+
+
+                        while(textScrolling) {
+
+                            float x = scrollText.getX();
+                            x -= 0.5;
+                            scrollText.setX(x);
+                            if(-x > textWidth ) { scrollText.setX( dm.widthPixels ); }
+                            try {
+                                Thread.sleep(1);
+                            } catch (Exception e) {}
+                        }
+                    }
+                }.start();
+
+
+
             }
         });
 
@@ -183,6 +238,9 @@ public class BluetoothChat extends Activity {
                 imageToDraw = ((BitmapDrawable) dr).getBitmap();
                 ImageView iv = findViewById(R.id.imageView);
                 iv.setImageBitmap(imageToDraw);
+                textScrolling = false;
+                scrollText.setAlpha(0);
+                editText.setText("");
             }
         });
 
@@ -228,7 +286,15 @@ public class BluetoothChat extends Activity {
 
         mAddButton.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
+                CropImage.activity()
+                    .setGuidelines(CropImageView.Guidelines.ON)
+                    .setAspectRatio(16, 9) //You can skip this for free form aspect ratio)
+                    .setAllowFlipping(true)
+                        .setAllowCounterRotation(true)
+                        .setAllowRotation(true)
+                        .setInitialRotation(0)
 
+                    .start(BluetoothChat.this);
             }
         });
 
@@ -390,11 +456,16 @@ public class BluetoothChat extends Activity {
                         scrollText.setAlpha((float) 1.0);
 
                         new Thread() {
+                            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
                             @Override
                             public void run() {
                                 float textWidth = StaticLayout.getDesiredWidth(scrollText.getText().toString(), scrollText.getPaint());
+                                Log.e("f","width:" + textWidth);
                                 DisplayMetrics dm = new DisplayMetrics();
+                                getWindowManager().getDefaultDisplay().getRealMetrics(dm);
                                 scrollText.setX( dm.widthPixels );
+
+
                                 while(textScrolling) {
 
                                     float x = scrollText.getX();
@@ -405,19 +476,17 @@ public class BluetoothChat extends Activity {
                                         Thread.sleep(1);
                                     } catch (Exception e) {}
                                 }
+                                scrollText.setAlpha(0);
+                                editText.setText("");
                             }
                         }.start();
 
                         break;
                     }
 
-                    //Log.e("Hmm", "I recieved a message of length: " + readBuf.length);
-
                     Bitmap bmp = BitmapFactory.decodeByteArray(readBuf, 0, readBuf.length);
 
                     iv.setImageBitmap(bmp);
-
-                    Log.e("Hmm", "I set the image..");
 
                     mConversationArrayAdapter.add(mConnectedDeviceName+":  " + readMessage);
                     break;
@@ -457,12 +526,51 @@ public class BluetoothChat extends Activity {
         return temp;
     }
 
+    public Uri getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
+    }
+
+    public Bitmap getResizedBitmap(Bitmap bm, int newWidth, int newHeight) {
+        int width = bm.getWidth();
+        int height = bm.getHeight();
+        float scaleWidth = ((float) newWidth) / width;
+        float scaleHeight = ((float) newHeight) / height;
+        // CREATE A MATRIX FOR THE MANIPULATION
+        Matrix matrix = new Matrix();
+        // RESIZE THE BIT MAP
+        matrix.postScale(scaleWidth, scaleHeight);
+
+        // "RECREATE" THE NEW BITMAP
+        Bitmap resizedBitmap = Bitmap.createBitmap(
+                bm, 0, 0, width, height, matrix, false);
+        bm.recycle();
+        return resizedBitmap;
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD_MR1)
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(D) Log.e(TAG, "onActivityResult " + resultCode);
 
         switch (requestCode) {
+            case CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE:
+                CropImage.ActivityResult result = CropImage.getActivityResult(data);
+                if (resultCode == RESULT_OK) {
+                    Uri resultUri = result.getUri();
+                    // Set uri as Image in the ImageView:
+
+                    imageToDraw = decodeUriToBitmap(context, resultUri);
+                    imageToDraw = getResizedBitmap(imageToDraw, 1920, 1080);
+                    Log.e("ree", "width: " + imageToDraw.getWidth() + " height: " + imageToDraw.getHeight());
+
+                    iv.setImageBitmap(imageToDraw);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Cropping failed :c", Toast.LENGTH_SHORT).show();
+                }
+                break;
             case 999:
                 if(resultCode == RESULT_OK) {
                     size = data.getIntExtra("size", 2);
@@ -499,6 +607,62 @@ public class BluetoothChat extends Activity {
                     finish();
                 }
                 break;
+        }
+    }
+
+
+
+    public boolean isExternalStorageWritable(){
+        String state= Environment.getExternalStorageState();
+        if(Environment.MEDIA_MOUNTED.equals(state)){ return true; }
+        return false;
+    }
+
+    public Bitmap decodeUriToBitmap(Context mContext, Uri sendUri) {
+            Bitmap getBitmap = null;
+            try {
+                InputStream image_stream;
+                try {
+                    image_stream = mContext.getContentResolver().openInputStream(sendUri);
+                    getBitmap = BitmapFactory.decodeStream(image_stream);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return getBitmap;
+        }
+
+    @RequiresApi(api = Build.VERSION_CODES.R)
+    public File bitmapToFile(Context context, Bitmap bitmap, String fileNameToSave) { // File name like "image.png"
+        //create a file to write bitmap data
+        File file = null;
+        try {
+            if (!Environment.isExternalStorageManager()){
+                Intent getpermission = new Intent();
+                getpermission.setAction(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
+                startActivity(getpermission);
+            }
+
+            if(!isExternalStorageWritable()) { return null; }
+            file = new File(Environment.getExternalStorageDirectory() + fileNameToSave);
+            //file.createNewFile();
+
+//Convert bitmap to byte array
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 0 , bos); // YOU can also save it in JPEG
+            byte[] bitmapdata = bos.toByteArray();
+
+//write the bytes in file
+            FileOutputStream fos = new FileOutputStream(file);
+            fos.write(bitmapdata);
+            fos.flush();
+            fos.close();
+            return file;
+        }catch (Exception e){
+            e.printStackTrace();
+            return file; // it will return null
         }
     }
 
@@ -568,7 +732,7 @@ public class BluetoothChat extends Activity {
                     DisplayMetrics dm = new DisplayMetrics();
                     getWindowManager().getDefaultDisplay().getRealMetrics(dm);
 
-                    imageX = (int) ((float) touchX*((float) 1920/(float) findViewById(R.id.imageView).getWidth())) -0;
+                    imageX = (int) ((float) touchX*((float) 1920/(float) findViewById(R.id.imageView).getWidth())) -viewCoords[1];
                     imageY = (int) ((float) touchY*((float) 1080/(float) findViewById(R.id.imageView).getHeight())) + 3*(83 -viewCoords[0]);
 
                     Log.e("wichtig", "x: " + viewCoords[0] + " y: " + viewCoords[1]);
@@ -589,7 +753,6 @@ public class BluetoothChat extends Activity {
                 mUndoButton.setAlpha((float) 1.0);
                 mRedoButton.setAlpha((float) 0.3);
 
-                iv = findViewById(R.id.imageView);
                 iv.setImageBitmap(imageToDraw);
 
                 break;

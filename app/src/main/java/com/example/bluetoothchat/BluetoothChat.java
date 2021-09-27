@@ -2,7 +2,6 @@ package com.example.bluetoothchat;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.Instrumentation;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
@@ -26,8 +25,6 @@ import android.os.Message;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.text.StaticLayout;
-import android.text.method.ScrollingMovementMethod;
-import android.util.AndroidException;
 import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -48,12 +45,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 
 import com.theartofdev.edmodo.cropper.CropImage;
@@ -63,9 +56,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
@@ -81,6 +72,7 @@ public class BluetoothChat extends Activity {
     public static final int MESSAGE_TOAST = 5;
     public static final int MESSAGE_TEXT = 6;
     public static final int MESSAGE_IMAGE = 7;
+    public static final int MESSAGE_PAINT = 888;
     // Key names received from the BluetoothChatService Handler
     public static final String DEVICE_NAME = "device_name";
     public static final String TOAST = "toast";
@@ -88,7 +80,7 @@ public class BluetoothChat extends Activity {
     private static final int REQUEST_CONNECT_DEVICE = 1;
     private static final int REQUEST_ENABLE_BT = 2;
     // Layout Views
-    private TextView mTitle, tv, scrollText;
+    private TextView mTitle, scrollText;
 
     // Name of the connected device
     private String mConnectedDeviceName = null;
@@ -103,7 +95,7 @@ public class BluetoothChat extends Activity {
     private Bitmap imageToDraw;
     private ImageView iv;
     private int pastX, pastY;
-    private Button mSendButton, msendTextButton, mSizeButton, mColorButton, mClearButton, mConnectButton, mUndoButton, mRedoButton, mAddButton;
+    private Button mSendButton, msendTextButton, mClearButton, mConnectButton, mPaintButton, mUndoButton, mRedoButton, mAddButton;
     private EditText editText;
     private Paint paint = new Paint();
     private int size = 30;
@@ -163,26 +155,17 @@ public class BluetoothChat extends Activity {
         scrollText      = (TextView) findViewById(R.id.scrollText   );
         editText        = (EditText) findViewById(R.id.editText     );
 
-        mSizeButton     = (Button) findViewById(R.id.button_size    );
         msendTextButton = (Button) findViewById(R.id.button_sendText);
-        mColorButton    = (Button) findViewById(R.id.button_color   );
         mClearButton    = (Button) findViewById(R.id.button_clear   );
         mConnectButton  = (Button) findViewById(R.id.button_connect );
         mUndoButton     = (Button) findViewById(R.id.button_undo    );
         mRedoButton     = (Button) findViewById(R.id.button_redo    );
         mAddButton      = (Button) findViewById(R.id.button_add     );
-
-        mSizeButton.setOnClickListener(new OnClickListener() {
-            public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), PopSize.class);
-                startActivityForResult(i, 999);
-            }
-        });
+        mPaintButton    = (Button) findViewById(R.id.colorTextView  );
 
         context = this;
-        tv = findViewById(R.id.colorTextView);
 
-        mColorButton.setOnClickListener(new OnClickListener() {
+        mPaintButton.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), PopColor.class);
                 startActivityForResult(i, 888);
@@ -574,13 +557,18 @@ public class BluetoothChat extends Activity {
             case 999:
                 if(resultCode == RESULT_OK) {
                     size = data.getIntExtra("size", 2);
-                    tv.setTextSize(size/2);
+                    mPaintButton.setTextSize(size/2);
                 }
                 break;
-            case 888:
+            case MESSAGE_PAINT:
                 if(resultCode == RESULT_OK) {
-                    color = data.getIntExtra("color", Color.parseColor(white));
-                    tv.setTextColor(color);
+                    String res = data.getStringExtra("color");
+                    String[] splitted = res.split(":");
+
+                    color = Integer.parseInt(splitted[0]);
+                    size = Integer.parseInt(splitted[1]);
+                    mPaintButton.setTextColor(color);
+                    mPaintButton.setTextSize(size/2);
                 }
                 break;
             case REQUEST_CONNECT_DEVICE:

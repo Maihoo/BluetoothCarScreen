@@ -7,22 +7,67 @@
     android:background="@color/colorPrimaryDark">
 
     <Button
-        android:id="@+id/button_confirm2"
+        android:id="@+id/button_10c"
+        android:layout_width="100px"
+        android:layout_height="216px"
+        android:text="⚫"
+        android:textSize="5pt"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button_20c"
+        android:layout_width="130px"
+        android:layout_height="216px"
+        android:text="⚫"
+        android:textSize="10pt"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button_10c" />
+
+    <Button
+        android:id="@+id/button_30c"
+        android:layout_width="150px"
+        android:layout_height="216px"
+        android:text="⚫"
+        android:textSize="13pt"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button_20c" />
+
+    <Button
+        android:id="@+id/button_40c"
+        android:layout_width="170px"
+        android:layout_height="216px"
+        android:text="⚫"
+        android:textSize="17pt"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button_30c" />
+
+    <Button
+        android:id="@+id/button_50c"
+        android:layout_width="200px"
+        android:layout_height="216px"
+        android:text="⚫"
+        android:textAlignment="inherit"
+        android:textSize="20pt"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button_40c" />
+
+    <Button
+        android:id="@+id/button_confirmc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:background="@color/colorGreen"
         android:text="✓"
         android:textSize="20pt"
-        android:background="@color/colorGreen"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/colorPickerView" />
+        app:layout_constraintStart_toEndOf="@+id/button_50c" />
 
     <com.skydoves.colorpickerview.ColorPickerView
         android:id="@+id/colorPickerView"
         android:layout_width="318dp"
         android:layout_height="326dp"
         android:background="@color/colorNone"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/button_40c"
         app:layout_constraintStart_toStartOf="parent">
 
     </com.skydoves.colorpickerview.ColorPickerView>

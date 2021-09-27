@@ -31,12 +31,12 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="SpeakableTextPresentCheck" />
 
-    <TextView
+    <Button
         android:id="@+id/colorTextView"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="●"
-
         android:textColor="#ffffff"
         android:textSize="15pt"
         app:layout_constraintStart_toEndOf="@+id/button_connect"
@@ -109,22 +109,6 @@
             android:layout_width="60dp"
             android:layout_height="50dp"
             android:drawableLeft="@drawable/trash"
-            tools:ignore="SpeakableTextPresentCheck" />
-
-        <Button
-            android:id="@+id/button_color"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="60dp"
-            android:layout_height="50dp"
-            android:drawableLeft="@drawable/color"
-            tools:ignore="SpeakableTextPresentCheck" />
-
-        <Button
-            android:id="@+id/button_size"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="60dp"
-            android:layout_height="50dp"
-            android:drawableLeft="@drawable/scale"
             tools:ignore="SpeakableTextPresentCheck" />
 
         <Button

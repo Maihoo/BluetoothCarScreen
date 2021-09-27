@@ -28,9 +28,6 @@
             android:theme="@android:style/Theme.Dialog"
 
             android:configChanges="orientation|keyboardHidden" />
-        <activity android:name=".PopSize"
-            android:theme="@style/AppTheme.CustomTheme"
-            android:configChanges="orientation|keyboardHidden" />
 
         <activity android:name=".PopColor"
             android:theme="@style/AppTheme.CustomTheme"

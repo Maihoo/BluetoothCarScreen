@@ -184,6 +184,10 @@ public class BluetoothChat extends Activity {
                     textScrolling = false;
                     return;
                 }
+                textScrolling = false;
+                try {
+                    Thread.sleep(10);
+                } catch (Exception e) {}
 
                 textScrolling = true;
                 scrollText.setText(editText.getText().toString());
@@ -199,9 +203,7 @@ public class BluetoothChat extends Activity {
                         getWindowManager().getDefaultDisplay().getRealMetrics(dm);
                         scrollText.setX( dm.widthPixels );
 
-
                         while(textScrolling) {
-
                             float x = scrollText.getX();
                             x -= 0.5;
                             scrollText.setX(x);
@@ -440,6 +442,10 @@ public class BluetoothChat extends Activity {
                             scrollText.setAlpha(0);
                             break;
                         }
+                        textScrolling = false;
+                        try {
+                            Thread.sleep(10);
+                        } catch (Exception e) {}
                         textScrolling = true;
                         scrollText.setText(readMessage.substring(3));
                         scrollText.setAlpha((float) 1.0);
@@ -454,9 +460,7 @@ public class BluetoothChat extends Activity {
                                 getWindowManager().getDefaultDisplay().getRealMetrics(dm);
                                 scrollText.setX( dm.widthPixels );
 
-
                                 while(textScrolling) {
-
                                     float x = scrollText.getX();
                                     x -= 0.5;
                                     scrollText.setX(x);

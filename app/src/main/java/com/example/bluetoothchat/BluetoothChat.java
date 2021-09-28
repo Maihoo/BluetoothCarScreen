@@ -174,7 +174,9 @@ public class BluetoothChat extends Activity {
 
         msendTextButton.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                byte[] st = editText.getText().toString().getBytes(StandardCharsets.UTF_8);
+                String toSend = editText.getText().toString();
+                if(toSend.equalsIgnoreCase("")) { toSend = "null"; }
+                byte[] st = toSend.getBytes(StandardCharsets.UTF_8);
                 mChatService.write(st);
 
 
@@ -433,7 +435,11 @@ public class BluetoothChat extends Activity {
                     Log.e("BLUE", "String: " + readMessage);
 
                     if(readMessage.substring(0, 3).equalsIgnoreCase("pic")) {
-                        if(readMessage.substring(3).equalsIgnoreCase("")) { textScrolling = false; }
+                        if(readMessage.substring(3).equalsIgnoreCase("null")) {
+                            textScrolling = false;
+                            scrollText.setAlpha(0);
+                            break;
+                        }
                         textScrolling = true;
                         scrollText.setText(readMessage.substring(3));
                         scrollText.setAlpha((float) 1.0);
@@ -460,7 +466,7 @@ public class BluetoothChat extends Activity {
                                     } catch (Exception e) {}
                                 }
                                 scrollText.setAlpha(0);
-                                editText.setText("");
+                                textScrolling = false;
                             }
                         }.start();
 
@@ -598,14 +604,6 @@ public class BluetoothChat extends Activity {
         }
     }
 
-
-
-    public boolean isExternalStorageWritable(){
-        String state= Environment.getExternalStorageState();
-        if(Environment.MEDIA_MOUNTED.equals(state)){ return true; }
-        return false;
-    }
-
     public Bitmap decodeUriToBitmap(Context mContext, Uri sendUri) {
             Bitmap getBitmap = null;
             try {
@@ -621,38 +619,6 @@ public class BluetoothChat extends Activity {
             }
             return getBitmap;
         }
-
-    @RequiresApi(api = Build.VERSION_CODES.R)
-    public File bitmapToFile(Context context, Bitmap bitmap, String fileNameToSave) { // File name like "image.png"
-        //create a file to write bitmap data
-        File file = null;
-        try {
-            if (!Environment.isExternalStorageManager()){
-                Intent getpermission = new Intent();
-                getpermission.setAction(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
-                startActivity(getpermission);
-            }
-
-            if(!isExternalStorageWritable()) { return null; }
-            file = new File(Environment.getExternalStorageDirectory() + fileNameToSave);
-            //file.createNewFile();
-
-//Convert bitmap to byte array
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.PNG, 0 , bos); // YOU can also save it in JPEG
-            byte[] bitmapdata = bos.toByteArray();
-
-//write the bytes in file
-            FileOutputStream fos = new FileOutputStream(file);
-            fos.write(bitmapdata);
-            fos.flush();
-            fos.close();
-            return file;
-        }catch (Exception e){
-            e.printStackTrace();
-            return file; // it will return null
-        }
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

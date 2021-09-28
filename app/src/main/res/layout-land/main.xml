@@ -61,7 +61,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:hint="tippe hier um scrolltext einzugeben"
-        android:inputType="textPersonName"
+        android:inputType="text"
         android:textColor="@color/colorWhite"
         android:textColorHint="@color/colorWhite"
         android:textSize="10pt"
@@ -73,15 +73,17 @@
         android:layout_width="78dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
 
         <Button
             android:id="@+id/button_add"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_width="60dp"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:drawableLeft="@drawable/add"
             tools:ignore="SpeakableTextPresentCheck" />
 
@@ -89,7 +91,7 @@
             android:id="@+id/button_undo"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_width="60dp"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:alpha="0.3"
             android:drawableLeft="@drawable/undo"
             tools:ignore="SpeakableTextPresentCheck" />
@@ -98,7 +100,7 @@
             android:id="@+id/button_redo"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_width="60dp"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:alpha="0.3"
             android:drawableLeft="@drawable/redo"
             tools:ignore="SpeakableTextPresentCheck" />
@@ -107,14 +109,14 @@
             android:id="@+id/button_clear"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_width="60dp"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:drawableLeft="@drawable/trash"
             tools:ignore="SpeakableTextPresentCheck" />
 
         <Button
             android:id="@+id/button_sendText"
             android:layout_width="60dp"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:backgroundTint="@color/colorGreen"
             android:drawableLeft="@drawable/sendtext"
             tools:ignore="SpeakableTextPresentCheck" />

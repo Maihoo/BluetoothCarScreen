@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Method;
+import java.nio.Buffer;
 import java.nio.charset.StandardCharsets;
 import java.util.Set;
 import java.util.UUID;
@@ -365,6 +366,7 @@ public class BluetoothChatService {
                     // Read from the InputStream
 
                     long ts1 = System.currentTimeMillis();
+                    buffer = new byte[1024];
                     int bytes = mmInStream.read(buffer);
                     long ts2 = System.currentTimeMillis();
                     if(ts2-ts1 > 1000) {
@@ -372,12 +374,16 @@ public class BluetoothChatService {
                         System.arraycopy(buffer, 0, firstThree, 0,3);
                         imgBuffer = new byte[1024 * 1024];
                         pos = 0;
+                        Log.e("speciall", "i been resetting :D...");
                     }
-                    Log.e("speciall", "i been reading :D...");
+                    Log.e("speciall", "i been reading :D..." + imgBuffer.toString());
                     System.arraycopy(buffer,0,imgBuffer,pos,bytes);
                     pos += bytes;
 
-                    mHandler.obtainMessage(BluetoothChat.MESSAGE_READ, pos, -1, imgBuffer).sendToTarget();
+                    byte[] tmp = new byte[imgBuffer.length];
+                    System.arraycopy(imgBuffer,0,tmp,0,imgBuffer.length);
+
+                    if(tmp.length>0) mHandler.obtainMessage(BluetoothChat.MESSAGE_READ, pos, -1, tmp).sendToTarget();
 
                 } catch (IOException e) {
                     connectionLost();

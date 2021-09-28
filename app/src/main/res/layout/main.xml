@@ -14,12 +14,13 @@
         android:layout_weight="1">
 
         <LinearLayout
+            android:id="@+id/linearLayout2"
             android:layout_width="1920px"
             android:layout_height="1080px"
             android:layout_marginStart="-420px"
             android:layout_marginTop="320px"
-            android:rotation="90"
             android:orientation="horizontal"
+            android:rotation="90"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -45,7 +46,7 @@
             <ListView
                 android:id="@+id/in"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+                android:layout_height="match_parent">
 
             </ListView>
 
@@ -87,79 +88,86 @@
 
         <EditText
             android:id="@+id/editText"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
-            android:layout_weight="1"
+
+            android:layout_marginEnd="40dp"
+            android:gravity="center"
             android:hint="tippe hier um scrolltext einzugeben"
-            android:inputType="textPersonName"
+            android:inputType="text"
             android:textColor="@color/colorWhite"
             android:textColorHint="@color/colorWhite"
             android:textSize="10pt"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintLeft_toLeftOf="parent" />
 
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:orientation="horizontal"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <Button
+                android:id="@+id/button_send"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:backgroundTint="@color/colorGreen"
+                android:drawableLeft="@drawable/send"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <Button
+                android:id="@+id/button_sendText"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:backgroundTint="@color/colorGreen"
+                android:drawableLeft="@drawable/sendtext"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <Button
+                android:id="@+id/button_clear"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:drawableLeft="@drawable/trash"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <Button
+                android:id="@+id/button_undo"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:alpha="0.3"
+                android:drawableLeft="@drawable/undo"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <Button
+                android:id="@+id/button_redo"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:alpha="0.3"
+                android:drawableLeft="@drawable/redo"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <Button
+                android:id="@+id/button_add"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:drawableLeft="@drawable/add"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+
+        </LinearLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top"
-        android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/button_send"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:backgroundTint="@color/colorGreen"
-            android:drawableLeft="@drawable/send"
-            tools:ignore="SpeakableTextPresentCheck" />
-
-        <Button
-            android:id="@+id/button_sendText"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:backgroundTint="@color/colorGreen"
-            android:drawableLeft="@drawable/sendtext"
-            tools:ignore="SpeakableTextPresentCheck" />
-
-        <Button
-            android:id="@+id/button_clear"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:drawableLeft="@drawable/trash"
-            tools:ignore="SpeakableTextPresentCheck" />
-
-        <Button
-            android:id="@+id/button_undo"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:drawableLeft="@drawable/undo"
-            android:alpha="0.3"
-            tools:ignore="SpeakableTextPresentCheck" />
-
-        <Button
-            android:id="@+id/button_redo"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:drawableLeft="@drawable/redo"
-            android:alpha="0.3"
-            tools:ignore="SpeakableTextPresentCheck" />
-
-        <Button
-            android:id="@+id/button_add"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:drawableLeft="@drawable/add"
-            tools:ignore="SpeakableTextPresentCheck" />
-
-
-
-    </LinearLayout>
 
 </LinearLayout>

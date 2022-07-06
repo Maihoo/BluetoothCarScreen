@@ -5,6 +5,7 @@
       <map>
         <entry key="..\:/Programme/Android Studio/BluetoothCarScreen/app/src/main/res/layout-land/main.xml" value="0.22" />
         <entry key="..\:/Programme/Android Studio/BluetoothCarScreen/app/src/main/res/layout-sw600dp/main.xml" value="0.1" />
+        <entry key="..\:/Programme/Android Studio/BluetoothCarScreen/app/src/main/res/layout/custom_title.xml" value="0.2610294117647059" />
         <entry key="..\:/Programme/Android Studio/BluetoothCarScreen/app/src/main/res/layout/main.xml" value="0.33" />
         <entry key="..\:/Programme/Android Studio/BluetoothCarScreen/app/src/main/res/layout/popupcolor.xml" value="0.25" />
         <entry key="..\:/Programme/Android Studio/BluetoothCarScreen/app/src/main/res/layout/popupsize.xml" value="0.2785947712418301" />
@@ -26,7 +27,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

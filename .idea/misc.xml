@@ -3,11 +3,26 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Programme/Android Studio/BluetoothCarScreen/app/src/main/res/layout-land/main.xml" value="0.22" />
+        <entry key="..\:/C-Kopie/GitHub/BluetoothCarScreen/app/src/main/res/layout-land/main.xml" value="0.33" />
+        <entry key="..\:/C-Kopie/GitHub/BluetoothCarScreen/app/src/main/res/layout-sw600dp/main.xml" value="0.22" />
+        <entry key="..\:/C-Kopie/GitHub/BluetoothCarScreen/app/src/main/res/layout-v11/main.xml" value="0.5541666666666667" />
+        <entry key="..\:/C-Kopie/GitHub/BluetoothCarScreen/app/src/main/res/layout/custom_title.xml" value="0.37777777777777777" />
+        <entry key="..\:/C-Kopie/GitHub/BluetoothCarScreen/app/src/main/res/layout/device_list.xml" value="0.37777777777777777" />
+        <entry key="..\:/C-Kopie/GitHub/BluetoothCarScreen/app/src/main/res/layout/device_name.xml" value="0.4925925925925926" />
+        <entry key="..\:/C-Kopie/GitHub/BluetoothCarScreen/app/src/main/res/layout/main.xml" value="0.33" />
+        <entry key="..\:/C-Kopie/GitHub/BluetoothCarScreen/app/src/main/res/layout/message.xml" value="0.4925925925925926" />
+        <entry key="..\:/C-Kopie/GitHub/BluetoothCarScreen/app/src/main/res/layout/popupcolor.xml" value="0.4925925925925926" />
+        <entry key="..\:/C-Kopie/GitHub/BluetoothCarScreen/app/src/main/res/layout/textview_stroke.xml" value="0.39675925925925926" />
+        <entry key="..\:/Programme/Android Studio/BluetoothCarScreen/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.3045" />
+        <entry key="..\:/Programme/Android Studio/BluetoothCarScreen/app/src/main/res/drawable/ic_launcher_background.xml" value="0.3045" />
+        <entry key="..\:/Programme/Android Studio/BluetoothCarScreen/app/src/main/res/layout-land/main.xml" value="0.33" />
         <entry key="..\:/Programme/Android Studio/BluetoothCarScreen/app/src/main/res/layout-sw600dp/main.xml" value="0.1" />
         <entry key="..\:/Programme/Android Studio/BluetoothCarScreen/app/src/main/res/layout/custom_title.xml" value="0.2610294117647059" />
+        <entry key="..\:/Programme/Android Studio/BluetoothCarScreen/app/src/main/res/layout/device_list.xml" value="0.5541666666666667" />
+        <entry key="..\:/Programme/Android Studio/BluetoothCarScreen/app/src/main/res/layout/device_name.xml" value="0.5541666666666667" />
         <entry key="..\:/Programme/Android Studio/BluetoothCarScreen/app/src/main/res/layout/main.xml" value="0.33" />
-        <entry key="..\:/Programme/Android Studio/BluetoothCarScreen/app/src/main/res/layout/popupcolor.xml" value="0.25" />
+        <entry key="..\:/Programme/Android Studio/BluetoothCarScreen/app/src/main/res/layout/message.xml" value="0.5541666666666667" />
+        <entry key="..\:/Programme/Android Studio/BluetoothCarScreen/app/src/main/res/layout/popupcolor.xml" value="0.40625" />
         <entry key="..\:/Programme/Android Studio/BluetoothCarScreen/app/src/main/res/layout/popupsize.xml" value="0.2785947712418301" />
         <entry key="..\:/Programme/Android Studio/BluetoothChat/app/src/main/res/layout-land/main.xml" value="0.25" />
         <entry key="..\:/Programme/Android Studio/BluetoothChat/app/src/main/res/layout-sw450dp-land/main.xml" value="0.651685393258427" />

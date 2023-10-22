@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.github.skydoves:colorpickerpreference:2.0.5@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/548fdc09c23644685b46f27a4cf3e0c9/transformed/colorpickerpreference-2.0.5/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/548fdc09c23644685b46f27a4cf3e0c9/transformed/colorpickerpreference-2.0.5/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/548fdc09c23644685b46f27a4cf3e0c9/transformed/colorpickerpreference-2.0.5/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/6b06acd43059ea855f3838a9e59b4fea/transformed/colorpickerpreference-2.0.5/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/6b06acd43059ea855f3838a9e59b4fea/transformed/colorpickerpreference-2.0.5/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/6b06acd43059ea855f3838a9e59b4fea/transformed/colorpickerpreference-2.0.5/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.skydoves/colorpickerpreference/2.0.5/ca8b63b3dcd558ba44c94ee076f811d2e169d752/colorpickerpreference-2.0.5-javadoc.jar!/" />

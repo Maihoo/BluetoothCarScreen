@@ -78,6 +78,14 @@ public class DeviceListActivity extends Activity {
             findViewById(R.id.title_paired_devices).setVisibility(View.VISIBLE);
             for (BluetoothDevice device : pairedDevices) {
                 mPairedDevicesArrayAdapter.add(device.getName() + "\n" + device.getAddress());
+                // Skip Selection and connect to Samsung Tablet
+                if (device.getAddress().equalsIgnoreCase(BluetoothChat.TABLET_BLUETOOTH_ADDRESS)) {
+                    mBtAdapter.cancelDiscovery();
+                    Intent intent = new Intent();
+                    intent.putExtra(EXTRA_DEVICE_ADDRESS, BluetoothChat.TABLET_BLUETOOTH_ADDRESS);
+                    setResult(Activity.RESULT_OK, intent);
+                    finish();
+                }
             }
         } else {
             String noDevices = getResources().getText(R.string.none_paired).toString();
@@ -110,7 +118,9 @@ public class DeviceListActivity extends Activity {
         }
         // Request discover from BluetoothAdapter
         mBtAdapter.startDiscovery();
+        Log.e("suchmich", "broh");
     }
+
     // The on-click listener for all devices in the ListViews
     private OnItemClickListener mDeviceClickListener = new OnItemClickListener() {
         public void onItemClick(AdapterView<?> av, View v, int arg2, long arg3) {
@@ -121,6 +131,7 @@ public class DeviceListActivity extends Activity {
             String address = info.substring(info.length() - 17);
             // Create the result Intent and include the MAC address
             Intent intent = new Intent();
+            Log.e("xxxxx", "" + address);
             intent.putExtra(EXTRA_DEVICE_ADDRESS, address);
             // Set result and finish this Activity
             setResult(Activity.RESULT_OK, intent);

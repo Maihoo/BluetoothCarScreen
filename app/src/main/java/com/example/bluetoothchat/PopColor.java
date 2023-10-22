@@ -176,6 +176,6 @@ public class PopColor extends Activity {
         getWindow().setLayout(width, height);
         //this.setFinishOnTouchOutside(true);
         PopupWindow attachmentPopup = new PopupWindow(this);
-        attachmentPopup.showAsDropDown(findViewById(R.id.colorTextView), -50, 0);
+        attachmentPopup.showAsDropDown(findViewById(R.id.button_color), -50, 0);
     }
 }

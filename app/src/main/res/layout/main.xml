@@ -15,90 +15,198 @@
 
         <LinearLayout
             android:id="@+id/linearLayout2"
-            android:layout_width="1920px"
-            android:layout_height="1080px"
-            android:layout_marginStart="-420px"
-            android:layout_marginTop="320px"
+            android:layout_width="1920px" android:layout_height="1080px"
+            android:layout_marginStart="-420px" android:layout_marginTop="420px"
             android:orientation="horizontal"
             android:rotation="90"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="match_parent" android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-
                 android:src="@drawable/blackground"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <EditText
-                android:id="@+id/editTextTextPersonName"
-                android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/scrollText"
+                android:layout_width="100000dp"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Name" />
+                android:alpha="0"
+                android:shadowColor="#000000"
+                android:shadowRadius="50"
+                android:text="TextView"
+                android:textColor="@color/colorWhite"
+                android:textSize="600px"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <ListView
-                android:id="@+id/in"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+        </LinearLayout>
 
-            </ListView>
+        <LinearLayout
+            android:id="@+id/linearLayout4"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="90dp"
+            android:gravity="left"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
+            <Button
+                android:id="@+id/button_preselect0"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <Button
+                android:id="@+id/button_preselect1"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <Button
+                android:id="@+id/button_preselect2"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <Button
+                android:id="@+id/button_preselect3"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <Button
+                android:id="@+id/button_preselect4"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                tools:ignore="SpeakableTextPresentCheck" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout5"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="90dp"
+            android:gravity="left"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView android:clickable="false"
+                android:scaleX="1.5" android:scaleY="1.5"
+                android:layout_width="60dp" android:layout_height="60dp"
+                android:src="@drawable/turbo"/>
+
+            <FrameLayout
+                android:layout_width="60dp"
+                android:layout_height="60dp">
+                <ImageView android:clickable="false"
+                    android:scaleX="1.5" android:scaleY="1.5"
+                    android:layout_width="60dp" android:layout_height="60dp"
+                    android:src="@drawable/heart"/>
+            </FrameLayout>
+
+            <TextView android:clickable="false"
+                android:layout_width="60dp" android:layout_height="60dp"
+                android:paddingTop="20dp" android:paddingLeft="15dp"
+                android:layout_marginLeft="-60dp"
+                android:scaleX="1.5"
+                android:scaleY="1.5"
+                android:text="Danke!"
+                android:textColor="#FFFFFF"
+                android:textSize="10sp" />
+
+            <FrameLayout
+                android:layout_width="60dp"
+                android:layout_height="60dp">
+                <ImageView android:clickable="false"
+                    android:scaleX="1.5" android:scaleY="1.5"
+                    android:layout_width="60dp" android:layout_height="60dp"
+                    android:src="@drawable/rettungsgasse"/>
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="60dp"
+                android:layout_height="60dp">
+                <ImageView android:clickable="false"
+                    android:scaleX="1.5" android:scaleY="1.5"
+                    android:layout_width="60dp" android:layout_height="60dp"
+                    android:src="@drawable/rettungsgasse_imageonly"/>
+            </FrameLayout>
+
+            <ImageView android:clickable="false"
+                android:scaleX="1.5" android:scaleY="1.5"
+                android:layout_width="60dp" android:layout_height="60dp"/>
         </LinearLayout>
 
         <Button
             android:id="@+id/button_connect"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:drawableLeft="@drawable/connect"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_centerInParent="true"
+            android:layout_marginEnd="16dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="SpeakableTextPresentCheck" />
 
-        <Button
-            android:id="@+id/colorTextView"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="●"
-            android:textColor="#ffffff"
-            android:textSize="15pt"
+        <ImageView
+            android:id="@+id/image_connect"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="right"
+            android:layout_marginEnd="16dp"
+            android:clickable="false"
+            android:scaleX="0.75" android:scaleY="0.75"
+            android:src="@drawable/disconnect"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button_connect" />
-
-        <TextView
-            android:id="@+id/scrollText"
-            android:layout_width="100000dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="0dp"
-            android:text="TextView"
-            android:textColor="@color/colorWhite"
-            android:alpha="0"
-            android:textSize="600px"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button_color"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="center"
+            android:paddingVertical="0dp"
+            android:paddingBottom="-5dp"
+            android:text="⬤"
+            android:textColor="#ffffff"
+            android:textSize="35dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button_connect"/>
 
         <EditText
             android:id="@+id/editText"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
-            android:layout_marginEnd="40dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginEnd="24dp"
             android:gravity="center"
-            android:hint="tippe hier um scrolltext einzugeben"
+            android:hint="Scroll-Text eingeben"
             android:inputType="text"
             android:textColor="@color/colorWhite"
-            android:textColorHint="@color/colorWhite"
+            android:textColorHint="@color/colorAccent"
             android:textSize="10pt"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintLeft_toLeftOf="parent" />
 
@@ -107,9 +215,9 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="top"
-            android:orientation="horizontal"
             android:gravity="center"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/editText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
@@ -118,7 +226,6 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:backgroundTint="@color/colorGreen"
-                android:drawableLeft="@drawable/send"
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <Button
@@ -126,7 +233,6 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:backgroundTint="@color/colorGreen"
-                android:drawableLeft="@drawable/sendtext"
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <Button
@@ -134,7 +240,6 @@
                 style="@style/Widget.AppCompat.Button.Borderless.Colored"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:drawableLeft="@drawable/trash"
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <Button
@@ -143,7 +248,6 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:alpha="0.3"
-                android:drawableLeft="@drawable/undo"
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <Button
@@ -152,7 +256,6 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:alpha="0.3"
-                android:drawableLeft="@drawable/redo"
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <Button
@@ -160,14 +263,69 @@
                 style="@style/Widget.AppCompat.Button.Borderless.Colored"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:drawableLeft="@drawable/add"
+                tools:ignore="SpeakableTextPresentCheck" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:clickable="false"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/editText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ImageView
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:clickable="false"
+                android:src="@drawable/send"
                 tools:ignore="SpeakableTextPresentCheck" />
 
+            <ImageView
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:clickable="false"
+                android:src="@drawable/sendtext"
+                tools:ignore="SpeakableTextPresentCheck" />
 
+            <ImageView
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:clickable="false"
+                android:src="@drawable/trash"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <ImageView
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:clickable="false"
+                android:src="@drawable/undo"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <ImageView
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:clickable="false"
+                android:src="@drawable/redo"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <ImageView
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:clickable="false"
+                android:src="@drawable/add"
+                tools:ignore="SpeakableTextPresentCheck" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
 </LinearLayout>
